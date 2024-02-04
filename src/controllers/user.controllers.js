@@ -7,8 +7,8 @@ const getAll = catchError(async(req, res) => {
     return res.json(user)
 });
 const  create = catchError(async (req,res)=>{
-    const { first_name , lastname , email , password , birthday } =  req.body;
-    const  newBody= {  first_name , lastname , email , password , birthday }
+    const { first_name , last_name , email , password , birthday } =  req.body;
+    const  newBody= {  first_name , last_name , email , password , birthday }
     const user = await User.create(newBody)
     return res.sendStatus(201).json(user)
 
@@ -28,8 +28,8 @@ const  destroy=catchError(async(req,res)=>{
 })
 const update=catchError(async(req,res)=>{
     const { id }=req.params
-    const  {first_name ,lastname ,password} = req.body
-    const newBody= {first_name ,lastname ,password}
+    const  {first_name ,last_name ,password} = req.body
+    const newBody= {first_name ,last_name ,password}
     const user = await User.findByPk(id)
     if (!user) return res.status(404).json({ message: 'El usuario no existe' })
     const userUpdate= await User.update(newBody,{where:{id},returning: true}
